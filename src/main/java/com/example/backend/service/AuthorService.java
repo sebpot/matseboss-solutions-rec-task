@@ -38,7 +38,7 @@ public class AuthorService {
 
     public GetAuthorResponse getAuthorById(Long id) throws IllegalArgumentException {
         Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Author not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Author not found with id: " + id));
 
         return GetAuthorResponse.builder()
                 .name(author.getName())

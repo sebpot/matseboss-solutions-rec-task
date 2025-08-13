@@ -22,7 +22,7 @@ public class NoteService {
     @Autowired
     private AuthorRepository authorRepository;
 
-    public void createNote(CreateNoteRequest request) {
+    public void createNote(CreateNoteRequest request) throws IllegalArgumentException {
         Optional<Author> author = authorRepository.findById(request.getAuthorId());
         if(author.isEmpty()) {
             throw new IllegalArgumentException("Author not found with id: " + request.getAuthorId());
@@ -50,7 +50,7 @@ public class NoteService {
         return new GetNotesResponse(notes);
     }
 
-    public GetNoteResponse getNoteById(Long id) {
+    public GetNoteResponse getNoteById(Long id) throws IllegalArgumentException {
         Note note = noteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Note not found with id: " + id));
 
@@ -62,7 +62,7 @@ public class NoteService {
                 .build();
     }
 
-    public void deleteNote(Long id) {
+    public void deleteNote(Long id) throws IllegalArgumentException {
         if(!noteRepository.existsById(id)) {
             throw new IllegalArgumentException("Note not found with id: " + id);
         }

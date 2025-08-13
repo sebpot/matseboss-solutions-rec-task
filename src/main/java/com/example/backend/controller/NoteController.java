@@ -16,7 +16,7 @@ public class NoteController {
     private NoteService noteService;
 
     @PostMapping("")
-    public ResponseEntity<?> createNote(CreateNoteRequest request) {
+    public ResponseEntity<?> createNote(CreateNoteRequest request) throws IllegalArgumentException {
         noteService.createNote(request);
         return ResponseEntity.ok().build();
     }
@@ -32,7 +32,7 @@ public class NoteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteNote(@PathVariable Long id) {
+    public ResponseEntity<?> deleteNote(@PathVariable Long id) throws IllegalArgumentException {
         noteService.deleteNote(id);
         return ResponseEntity.ok().build();
     }
